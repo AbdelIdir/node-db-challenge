@@ -11,6 +11,10 @@ exports.seed = async knex => {
     {
       name: "React",
       description: "for the frontend"
+    },
+    {
+      name: "sqlite",
+      description: "for the db"
     }
   ]);
 };

@@ -30,6 +30,17 @@ exports.up = function(knex) {
         .inTable("projects")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
+      // tbl.foreign("project_id");
+    })
+
+    .createTable("resources", tbl => {
+      tbl.increments();
+      tbl
+        .string("name", 255)
+        .notNullable()
+        .unique();
+
+      tbl.string("description", 255);
     })
 
     .createTable("projects_resources", tbl => {
@@ -42,6 +53,7 @@ exports.up = function(knex) {
         .inTable("projects")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
+      // tbl.foreign("project_id");
 
       tbl
         .integer("resource_id")
@@ -51,23 +63,14 @@ exports.up = function(knex) {
         .inTable("resources")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-    })
-
-    .createTable("resources", tbl => {
-      tbl.increments();
-      tbl
-        .string("name", 255)
-        .notNullable()
-        .unique();
-
-      tbl.string("description", 255);
+      // tbl.foreign("resource_id");
     });
 };
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTableIfExists("resources")
     .dropTableIfExists("projects_resources")
+    .dropTableIfExists("resources")
     .dropTableIfExists("tasks")
     .dropTableIfExists("projects");
 };

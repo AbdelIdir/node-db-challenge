@@ -23,6 +23,13 @@ function findTasks(projectId) {
     .where("project_id", projectId);
 }
 
+
+function addResources(resource) {
+  return db("resources")
+}
+
+
+
 function findById(id) {
   return db
     .select("*")
